@@ -5,6 +5,7 @@
 # <bitbar.author>Ryan Chiechi</bitbar.author>
 # <bitbar.author.github>rchiechi</bitbar.author.github>
 # <bitbar.desc>Shows put.io transfers</bitbar.desc>
+# <bitbar.image>https://github.com/rchiechi/bitbar/blob/master/putio.png</bitbar.image>
 # <bitbar.dependencies>Python,Requests</bitbar.dependencies>
 
 import requests,json,base64
