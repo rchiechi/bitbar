@@ -6,7 +6,7 @@
 # <bitbar.author.github>rchiechi</bitbar.author.github>
 # <bitbar.desc>Shows put.io transfers</bitbar.desc>
 # <bitbar.image>http://imgur.com/L85lfpv</bitbar.image>
-# <bitbar.dependencies>Python,Requests</bitbar.dependencies>
+# <bitbar.dependencies>Python3,Requests</bitbar.dependencies>
 
 import requests,json,base64
 
