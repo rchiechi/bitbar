@@ -29,7 +29,7 @@ function checkrunning() {
 function checkQ() {
     ssh ${HOST} "squeue ${1} -S U --format='%.18i %.8j %.2t %.10M %.6D %R'" | while read job; do
         if [ $(printf "${job}" | grep -c 'JOBID') -gt 0 ]; then
-            echo "--${job} | color=black"
+            echo "--${job}"
         elif [ $(printf "${job}" | grep -c ' R ') -gt 0 ]; then
             echo "--${job} | color=green"
         else
@@ -48,7 +48,7 @@ elif [ $(checkrunning) == 2 ]; then
 fi
 printf "]\n"
 echo "---"
-echo "My Jobs | color=black"
+echo "My Jobs"
 checkQ "-u ${UN}"
-echo "All Jobs | color=black"
+echo "All Jobs"
 checkQ
