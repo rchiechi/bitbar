@@ -6,7 +6,7 @@
 # <bitbar.author.github>rchiechi</bitbar.author.github>
 # <bitbar.desc>Quickly mount endpoints in rclone.</bitbar.desc>
 # <bitbar.image>https://i.imgur.com/woYDSdX.png</bitbar.image>
-# <bitbar.dependencies>bash</bitbar.dependencies>
+# <bitbar.dependencies>bash, rclone</bitbar.dependencies>
 
 
 TARGET=${HOME}/encrypted
