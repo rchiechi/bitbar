@@ -5,7 +5,7 @@
 # <bitbar.author>Ryan Chiechi</bitbar.author>
 # <bitbar.author.github>rchiechi</bitbar.author.github>
 # <bitbar.desc>Quickly mount endpoints in rclone.</bitbar.desc>
-# <bitbar.image>https://i.imgur.com/qhlj55I.png</bitbar.image>
+# <bitbar.image>https://i.imgur.com/woYDSdX.png</bitbar.image>
 # <bitbar.dependencies>bash</bitbar.dependencies>
 
 
