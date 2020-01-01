@@ -12,3 +12,4 @@ Needs [public-key authentication](https://help.ubuntu.com/community/SSH/OpenSSH/
 
 ## Rclone Mount
 Mount and unmount rclone remotes. Needs [rclone](https://rclone.org)
+![screenshot](https://i.imgur.com/qhlj55I.png)
