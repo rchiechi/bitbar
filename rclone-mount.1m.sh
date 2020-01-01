@@ -23,22 +23,35 @@ function rcloneimage() {
 function mountpoint() {
   mount | grep -q "$1"
   return $?
+}
 
+function remotemounted() {
+  while IFS= read -r remote; do
+    mountpoint "${remote}" && return 0
+  done < <(${RCLONE} --ask-password=false listremotes)
+  return 1
 }
 
 function isremote() {
-  ${RCLONE} --ask-password=false listremotes | while read remote; do
-    if [[ "$1" == "${remote}" ]] ; then
-      return 0
-    fi
-  done
+  while IFS= read -r remote; do
+    [[ "$1" == "${remote}" ]] && return 0
+  done < <(${RCLONE} --ask-password=false listremotes)
   return 1
 }
 
 function domount() {
   mountpoint "${TARGET}" && return 1
   ${RCLONE} --ask-password=false mount --daemon "${1}" "${TARGET}" >/dev/null 2>&1
-  return $?
+  RETURN=$?
+  sleep 5
+  return
+}
+
+function dounmount() {
+  diskutil unmount ${TARGET} >/dev/null 2>&1
+  RETURN=$?
+  sleep 5
+  return
 }
 
 function listremotes() {
@@ -56,17 +69,20 @@ function listremotes() {
   done
 }
 
-if [[ -n "$1" ]] && mountpoint "$1" ; then
-  diskutil unmount ${TARGET} >/dev/null 2>&1
-  sleep 1
-  exit
-elif [[ -n "$1" ]] && isremote "$1" ; then
-  domount "${1}"
-  sleep 3
-  exit
+if [[ -n "$1" ]] && ! isremote "$1"; then
+  exit 1
+elif [[ -n "$1" ]] && mountpoint "$1" ; then
+  dounmount
+  exit $?
+elif [[ -n "$1" ]] && remotemounted "$1" ; then
+  dounmount && domount "$1"
+  exit $?
+elif [[ -n "$1" ]]; then
+  domount "$1"
+  exit $?
 fi
 
-
+# Output menu items
 rcloneimage
 echo " | image=${icon}"
 listremotes
