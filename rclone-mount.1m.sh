@@ -43,7 +43,8 @@ function isremote() {
 
 function domount() {
   mountpoint "${TARGET}" && return 1
-  ${RCLONE} --ask-password=false mount --daemon "${1}" "${TARGET}" >/dev/null 2>&1
+  ${RCLONE} --ask-password=false mount --vfs-cache-mode=writes \
+    --daemon "${1}" "${TARGET}" >/dev/null 2>&1
   RETURN=$?
   sleep 5
   return
