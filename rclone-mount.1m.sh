@@ -16,6 +16,7 @@ RCLONE=/usr/local/bin/rclone
 # If your rclone config is not encrypted, comment out the next two lines
 RCLONEPASS=${HOME}/.password-store/Macbert/rclone.gpg
 export RCLONE_CONFIG_PASS=$(/usr/local/bin/gpg -o - -d "${RCLONEPASS}" 2>/dev/null)
+export RCLONE_ASK_PASSWORD=false
 
 # You should not need to edit anythinng below here.
 function rcloneimage() {
@@ -30,20 +31,20 @@ function mountpoint() {
 function remotemounted() {
   while IFS= read -r remote; do
     mountpoint "${remote}" && return 0
-  done < <(${RCLONE} --ask-password=false listremotes)
+  done < <(${RCLONE} listremotes)
   return 1
 }
 
 function isremote() {
   while IFS= read -r remote; do
     [[ "$1" == "${remote}" ]] && return 0
-  done < <(${RCLONE} --ask-password=false listremotes)
+  done < <(${RCLONE} listremotes)
   return 1
 }
 
 function domount() {
   mountpoint "${TARGET}" && return 1
-  ${RCLONE} --ask-password=false mount --daemon "${1}" "${TARGET}" >/dev/null 2>&1
+  ${RCLONE} mount --vfs-cache-mode=writes --daemon "${1}" "${TARGET}" >/dev/null 2>&1
   RETURN=$?
   sleep 5
   return
@@ -58,7 +59,7 @@ function dounmount() {
 
 function listremotes() {
   echo "---"
-  ${RCLONE} --ask-password=false listremotes | while read remote; do
+  ${RCLONE} listremotes | while read remote; do
     _item=$(printf "${remote}" | tr -d ':')
     if mountpoint ${remote} ; then
       color="color=green"
