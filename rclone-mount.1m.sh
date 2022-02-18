@@ -12,7 +12,7 @@
 #TARGET is the local mountpoint for the remote
 TARGET=${HOME}/encrypted
 #Homebrew installs rclone /usr/local/bin
-RCLONE=/usr/local/bin/rclone
+RCLONE=/opt/bin/rclone
 # If your rclone config is not encrypted, comment out the next two lines
 RCLONEPASS=${HOME}/.password-store/Macbert/rclone.gpg
 export RCLONE_CONFIG_PASS=$(/usr/local/bin/gpg -o - -d "${RCLONEPASS}" 2>/dev/null)
