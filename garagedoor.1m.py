@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env PYTHONIOENCODING=UTF-8 python3
 # Metadata allows your plugin to show up in the app, and website.
 #
 #  <xbar.title>Garage Door</xbar.title>
@@ -17,16 +17,28 @@
 #  <xbar.var>boolean(VAR_VERBOSE=true): Whether to be verbose or not.</xbar.var>
 #  <xbar.var>select(VAR_STYLE="normal"): Which style to use. [small, normal, big]</xbar.var>
 
+import sys
+sys.path.append('/opt/homebrew/lib/python3.9/site-packages')
+import os
+import base64
 import requests
 
-URL="http://garagedoor.krustylu.org"
+PWD = os.path.dirname(os.path.realpath(__file__))
+URL = "http://garagedoor.krustylu.org"
 
 def check_status():
-    response = requests.get("$s/status" % URL)
+    response = requests.get("%s/status" % URL)
     data = response.json()
     return data['inputs'][0]['input']
-    
-if check_status() == '1':
-    print("Closed")
-if check_status() == '0':
-    print("Open")
+
+
+if check_status() == 1:
+    png = base64.b64encode(open(os.path.join(PWD, 'door_closed.png'), 'rb').read())
+    print(" | image=%s" % str(png, encoding='utf8'))
+    #print("Closed | color=green")
+elif check_status() == 0:
+    png = base64.b64encode(open(os.path.join(PWD, 'door_closed.png'), 'rb').read())
+    print(" | image=%s" % str(png, encoding='utf8'))
+    #print("Open | color=red")
+else:
+    print("??? | color=blue")
