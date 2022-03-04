@@ -37,7 +37,7 @@ if check_status() == 1:
     print(" | image=%s" % str(png, encoding='utf8'))
     #print("Closed | color=green")
 elif check_status() == 0:
-    png = base64.b64encode(open(os.path.join(PWD, 'door_closed.png'), 'rb').read())
+    png = base64.b64encode(open(os.path.join(PWD, 'door_open.png'), 'rb').read())
     print(" | image=%s" % str(png, encoding='utf8'))
     #print("Open | color=red")
 else:
