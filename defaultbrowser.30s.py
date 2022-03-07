@@ -49,6 +49,8 @@ def main():
     current_browser = getcurrentbrowser()
     if current_browser in BROWSERS:
         print(" | image='%s'" % BROWSERS[current_browser][1])
+    else:
+        print ("??? | color=blue")
     # Everything else goes in menus
     print('---')
     for browser in enumerate(BROWSERS):
