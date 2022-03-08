@@ -23,6 +23,7 @@ import os
 import base64
 import requests
 
+
 PWD = os.path.dirname(os.path.realpath(__file__))
 URL = "http://garagedoor.krustylu.org"
 
