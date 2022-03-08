@@ -29,8 +29,10 @@ URL = "http://garagedoor.krustylu.org"
 def check_status():
     response = requests.get("%s/status" % URL)
     data = response.json()
-    return data['inputs'][0]['input']
-
+    if 'inputs' in data:
+        return data['inputs'][0]['input']
+    else:
+        return -1
 
 if check_status() == 1:
     png = base64.b64encode(open(os.path.join(PWD, 'door_closed.png'), 'rb').read())
