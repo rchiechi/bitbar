@@ -25,7 +25,8 @@ import requests
 
 
 PWD = os.path.dirname(os.path.realpath(__file__))
-URL = "http://garagedoor.krustylu.org"
+# URL = "http://garagedoor.krustylu.org"
+URL = "http://10.10.10.180:5000"
 
 def check_status():
     response = requests.get("%s/status" % URL)
