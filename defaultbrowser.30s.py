@@ -37,7 +37,10 @@ def getcurrentbrowser():
 
 def listbrowsers():
     __p = subprocess.run([DBBIN], capture_output=True)
-    return __p.stdout
+    browsers = []
+    for __browser in str(__p.stdout, encoding="utf8").split("\n"):
+        browsers.append(__browser.strip())
+    return browsers
 
 def switchbrowsers(browser):
     __p = subprocess.run([DBBIN, browser])
@@ -47,6 +50,7 @@ def switchbrowsers(browser):
 
 def main():
     current_browser = getcurrentbrowser()
+    browsers = listbrowsers()
     if current_browser in BROWSERS:
         print(" | image='%s'" % BROWSERS[current_browser][1])
     else:
@@ -55,15 +59,16 @@ def main():
     print('---')
     for browser in enumerate(BROWSERS):
         __key = browser[1]
-        print(" | image='%s' shell='%s' param1='%s' refresh=true terminal=false" %
-              (BROWSERS[__key][1], DBBIN, __key))
+        if __key in browsers:
+            print(" | image='%s' shell='%s' param1='%s' refresh=true terminal=false" %
+                (BROWSERS[__key][1], DBBIN, __key))
 
 
-BROWSERS = {"safari":("Safari",
-            geticonasbase64('safari.png')),
-            "firefox":("Firefox", geticonasbase64('firefox.png')), "chrome":("Chrome",
-            geticonasbase64('chrome.png')),
-            "edgemac":("Edge", geticonasbase64('edge.png'))
+BROWSERS = {"safari":("Safari", geticonasbase64('safari.png')),
+            "firefox":("Firefox", geticonasbase64('firefox.png')),
+            "chrome":("Chrome", geticonasbase64('chrome.png')),
+            "edgemac":("Edge", geticonasbase64('edge.png')),
+            "browser":("Brave", geticonasbase64('brave.png'))
             }
 
 main()
