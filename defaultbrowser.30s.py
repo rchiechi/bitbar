@@ -54,14 +54,14 @@ def main():
     if current_browser in BROWSERS:
         print(" | image='%s'" % BROWSERS[current_browser][1])
     else:
-        print ("??? | color=blue")
+        print("??? | color=blue")
     # Everything else goes in menus
     print('---')
     for browser in enumerate(BROWSERS):
         __key = browser[1]
         if __key in browsers:
             print(" | image='%s' shell='%s' param1='%s' refresh=true terminal=false" %
-                (BROWSERS[__key][1], DBBIN, __key))
+                  (BROWSERS[__key][1], DBBIN, __key))
 
 
 BROWSERS = {"safari":("Safari", geticonasbase64('safari.png')),
