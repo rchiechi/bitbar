@@ -31,8 +31,11 @@ PWD = os.path.dirname(os.path.realpath(__file__))
 URL = "http://10.10.10.180:5000"
 
 def check_status():
-    response = requests.get("%s/status" % URL)
-    data = response.json()
+    try:
+        response = requests.get("%s/status" % URL, timeout=10)
+        data = response.json()
+    except requests.exceptions.RequestException:
+        data = {}
     if 'inputs' in data:
         return data['inputs'][0]['input']
     else:
