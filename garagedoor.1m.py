@@ -1,4 +1,4 @@
-#!/usr/bin/env PYTHONIOENCODING=UTF-8 python3
+#!/opt/homebrew/bin/python3
 # Metadata allows your plugin to show up in the app, and website.
 #
 #  <xbar.title>Garage Door</xbar.title>

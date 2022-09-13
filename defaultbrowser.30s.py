@@ -1,4 +1,5 @@
-#!/usr/bin/env PYTHONIOENCODING=UTF-8 python3
+#!/opt/homebrew/bin/python3
+# -*- coding:utf-8 -*-
 
 # <bitbar.title>Default Browser</bitbar.title>
 # <bitbar.version>v1.0</bitbar.version>
