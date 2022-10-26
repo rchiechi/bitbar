@@ -65,7 +65,8 @@ def main():
                   (BROWSERS[__key][1], DBBIN, __key))
 
 
-BROWSERS = {"safari":("Safari", geticonasbase64('safari.png')),
+BROWSERS = {"linkobrowser":("Linko", geticonasbase64('linko.png')),
+            "safari":("Safari", geticonasbase64('safari.png')),
             "firefox":("Firefox", geticonasbase64('firefox.png')),
             "chrome":("Chrome", geticonasbase64('chrome.png')),
             "edgemac":("Edge", geticonasbase64('edge.png')),
