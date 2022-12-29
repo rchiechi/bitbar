@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/python3
+#!/usr/bin/python3
 # -*- coding:utf-8 -*-
 # Metadata allows your plugin to show up in the app, and website.
 #
