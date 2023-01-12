@@ -9,9 +9,24 @@
 # <bitbar.dependencies>bash, roon</bitbar.dependencies>
 
 
+geticon(){
+    if readlink "$0" > /dev/null
+    then
+        script=$(readlink "$0")
+    else
+        script=$0
+    fi
+    basedir=$(dirname "$script")
+    icon=$(base64 -w0 "${basedir}/icons/roon.png")
+    echo "${icon}"
+}
+
+# echo "$(dirname $0)"
+
 if [[ -z "$1" ]]
 then
-    echo "Roon"
+    echo " | image=$(geticon)"
+    # echo "Roon"
     echo "---"
     # echo "${emoji}  ${_item}| bash='$0' param1=${remote} refresh=true terminal=false ${color}"
     echo "Play | bash='$0' param1=control param2=play refresh=true terminal=false"
