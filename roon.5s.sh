@@ -47,13 +47,18 @@ then
     echo " | image=${ROONICON}"
     echo "---"
     # echo "${emoji}  ${_item}| bash='$0' param1=${remote} refresh=true terminal=false ${color}"
-    echo "Play | bash='$0' param1=control param2=play refresh=true terminal=false"
-    echo "Stop | bash='$0' param1=control param2=stop refresh=true terminal=false"
-    echo "Next | bash='$0' param1=control param2=stop refresh=true terminal=false"
-    echo "-----"
-    echo "Playing:${artist}"
-    echo "${track}"
-    echo "From:${album}"
+    
+    if [[ ISPLAYING == 1 ]]
+    then
+        echo "Stop | bash='$0' param1=control param2=stop refresh=true terminal=false"
+        echo "Next | bash='$0' param1=control param2=stop refresh=true terminal=false"
+        echo "-----"
+        echo "Playing:${artist}"
+        echo "${track}"
+        echo "From:${album}"
+    else
+        echo "Play | bash='$0' param1=control param2=play refresh=true terminal=false"
+    fi
 fi
 
 if [[ $1 == "control" ]]
