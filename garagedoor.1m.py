@@ -32,7 +32,10 @@ PWD = os.path.dirname(os.path.realpath(__file__))
 URL = "http://10.10.10.180:5000"
 
 def check_status():
-    response = requests.get("%s/status" % URL)
+    try:
+        response = requests.get("%s/status" % URL)
+    except requests.exceptions.ConnectionError:
+        return -1
     data = response.json()
     if 'inputs' in data:
         return data['inputs'][0]['input']
@@ -47,5 +50,8 @@ elif check_status() == 0:
     png = base64.b64encode(open(os.path.join(PWD, 'door_open.png'), 'rb').read())
     print(" | image=%s" % str(png, encoding='utf8'))
     #print("Open | color=red")
+elif check_status() == -1:
+    png = base64.b64encode(open(os.path.join(PWD, 'door_unknown.png'), 'rb').read())
+    print(" | image=%s" % str(png, encoding='utf8'))
 else:
     print("??? | color=blue")
