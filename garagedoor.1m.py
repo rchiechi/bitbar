@@ -4,19 +4,12 @@
 #
 #  <xbar.title>Garage Door</xbar.title>
 #  <xbar.version>v1.0</xbar.version>
-#  <xbar.author>Your Name, Another author name</xbar.author>
-#  <xbar.author.github>your-github-username,another-github-username</xbar.author.github>
-#  <xbar.desc>Short description of what your plugin does.</xbar.desc>
-#  <xbar.image>http://www.hosted-somewhere/pluginimage</xbar.image>
-#  <xbar.dependencies>python,ruby,node</xbar.dependencies>
-#  <xbar.abouturl>http://url-to-about.com/</xbar.abouturl>
-
-# Variables become preferences in the app:
-#
-#  <xbar.var>string(VAR_NAME="Mat Ryer"): Your name.</xbar.var>
-#  <xbar.var>number(VAR_COUNTER=1): A counter.</xbar.var>
-#  <xbar.var>boolean(VAR_VERBOSE=true): Whether to be verbose or not.</xbar.var>
-#  <xbar.var>select(VAR_STYLE="normal"): Which style to use. [small, normal, big]</xbar.var>
+#  <xbar.author>Ryan Chiechi</xbar.author>
+#  <xbar.author.github>rchiechi</xbar.author.github>
+#  <xbar.dependencies>python</xbar.dependencies>
+# <swiftbar.hideAbout>true</swiftbar.hideAbout>
+# <swiftbar.hideRunInTerminal>true</swiftbar.hideRunInTerminal>
+# <swiftbar.hideDisablePlugin>true</swiftbar.hideDisablePlugin>
 
 import sys
 sys.path.append('/opt/homebrew/lib/python3.9/site-packages')
@@ -28,12 +21,12 @@ import requests
 
 
 PWD = os.path.dirname(os.path.realpath(__file__))
-# URL = "http://garagedoor.krustylu.org"
-URL = "http://10.10.10.180:5000"
+URL1 = "http://10.10.10.67"
+URL2 = "http://10.10.10.180:5000"
 
-def check_status():
+def check_status(url):
     try:
-        response = requests.get("%s/status" % URL)
+        response = requests.get("%s/status" % url)
     except requests.exceptions.ConnectionError:
         return -1
     data = response.json()
@@ -42,16 +35,14 @@ def check_status():
     else:
         return -1
 
-if check_status() == 1:
-    png = base64.b64encode(open(os.path.join(PWD, 'door_closed.png'), 'rb').read())
-    print(" | image=%s" % str(png, encoding='utf8'))
-    #print("Closed | color=green")
-elif check_status() == 0:
-    png = base64.b64encode(open(os.path.join(PWD, 'door_open.png'), 'rb').read())
-    print(" | image=%s" % str(png, encoding='utf8'))
-    #print("Open | color=red")
-elif check_status() == -1:
-    png = base64.b64encode(open(os.path.join(PWD, 'door_unknown.png'), 'rb').read())
-    print(" | image=%s" % str(png, encoding='utf8'))
-else:
-    print("??? | color=blue")
+
+for _url in [URL1, URL2]:
+    if check_status(_url) == 1:
+        print(":door.garage.closed:", end='')
+    elif check_status(_url) == 0:
+        print(":door.garage.open:", end='')
+    elif check_status(_url) == -1:
+        print(":door.garage.open.trianglebadge.exclamationmark:", end='')
+    else:
+        print("??? | color=blue", end='')
+print("")
