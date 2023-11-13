@@ -41,5 +41,5 @@ for _door in ['pinky', 'mustang']:
     elif _state == 'open':
         print(":door.garage.open:", end='')
     else:
-        print(f":door.garage.open.trianglebadge.exclamationmark:", end='')
+        print(":door.garage.open.trianglebadge.exclamationmark:", end='')
 print("")
