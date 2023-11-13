@@ -21,28 +21,25 @@ import requests
 
 
 PWD = os.path.dirname(os.path.realpath(__file__))
-URL1 = "http://10.10.10.67"
-URL2 = "http://10.10.10.180:5000"
+BASEURL = "https://api.krustylu.org/garage"
 
 def check_status(url):
     try:
-        response = requests.get("%s/status" % url)
+        r = requests.get(url)
+        return r.json().get('state', 'fail')
     except requests.exceptions.ConnectionError:
-        return -1
-    data = response.json()
-    if 'inputs' in data:
-        return data['inputs'][0]['input']
-    else:
-        return -1
+        return 'fail'
 
 
-for _url in [URL1, URL2]:
-    if check_status(_url) == 1:
+for _door in ['pinky', 'mustang']:
+    try:
+        _state = requests.get(f'{BASEURL}?door={_door}').json().get('state', 'fail')
+    except requests.exceptions.ConnectionError:
+        _state = 'faile'
+    if _state == 'closed':
         print(":door.garage.closed:", end='')
-    elif check_status(_url) == 0:
+    elif _state == 'open':
         print(":door.garage.open:", end='')
-    elif check_status(_url) == -1:
-        print(":door.garage.open.trianglebadge.exclamationmark:", end='')
     else:
-        print("??? | color=blue", end='')
+        print(f":door.garage.open.trianglebadge.exclamationmark:", end='')
 print("")
