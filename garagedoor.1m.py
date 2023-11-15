@@ -32,14 +32,17 @@ def check_status(url):
 
 
 for _door in ['pinky', 'mustang']:
+    _sfcolor = 'orange'
     try:
         _state = requests.get(f'{BASEURL}?door={_door}').json().get('state', 'fail')
     except requests.exceptions.ConnectionError:
-        _state = 'faile'
+        _state = 'fail'
     if _state == 'closed':
+        _sfcolor = 'green'
         print(":door.garage.closed:", end='')
     elif _state == 'open':
+        _sfcolor = 'red'
         print(":door.garage.open:", end='')
     else:
-        print(":door.garage.open.trianglebadge.exclamationmark:", end='')
-print("")
+        print(":door.garage.open.trianglebadge.exclamationmark: | sfcolor=organge", end='')
+print(f"| sfcolor={_sfcolor}")
