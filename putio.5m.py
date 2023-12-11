@@ -1,4 +1,5 @@
-#!/usr/local/bin/python3
+#!/opt/python/swiftbar/bin/python
+
 
 # <bitbar.title>put.io transfers</bitbar.title>
 # <bitbar.version>v1.0</bitbar.version>

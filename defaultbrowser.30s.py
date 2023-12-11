@@ -1,4 +1,5 @@
-#!/opt/homebrew/bin/python3
+#!/opt/python/swiftbar/bin/python
+
 # -*- coding:utf-8 -*-
 
 # <bitbar.title>Default Browser</bitbar.title>

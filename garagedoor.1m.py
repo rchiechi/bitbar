@@ -1,4 +1,5 @@
-#!/opt/homebrew/bin/python3
+#!/opt/python/swiftbar/bin/python
+
 # -*- coding:utf-8 -*-
 # Metadata allows your plugin to show up in the app, and website.
 #
