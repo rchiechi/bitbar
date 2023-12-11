@@ -54,7 +54,7 @@ def main():
     current_browser = getcurrentbrowser()
     browsers = listbrowsers()
     if current_browser in BROWSERS:
-        print(f"{BROWSERS[current_browser][0]} | size=6 image='{BROWSERS[current_browser][1]}'")
+        print(f" | size=6 image='{BROWSERS[current_browser][1]}'")
     else:
         print("??? | color=blue")
     # Everything else goes in menus
@@ -62,8 +62,8 @@ def main():
     for browser in enumerate(BROWSERS):
         _key = browser[1]
         if _key in browsers:
-            print(" | image='%s' shell='%s' param1='%s' refresh=true terminal=false" %
-                  (BROWSERS[_key][1], DBBIN, _key))
+            print("%s | size=10 image='%s' shell='%s' param1='%s' refresh=true terminal=false" %
+                  (BROWSERS[_key][0], BROWSERS[_key][1], DBBIN, _key))
 
 
 BROWSERS = {"linkobrowser":("Linko", geticonasbase64('linko.png')),
