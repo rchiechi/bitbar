@@ -8,6 +8,10 @@
 # <bitbar.author.github>rchiechi</bitbar.author.github>
 # <bitbar.desc>Provides a menu to swap default browsers quickly.</bitbar.desc>
 # <bitbar.dependencies>bash</bitbar.dependencies>
+# <swiftbar.hideAbout>true</swiftbar.hideAbout>
+# <swiftbar.hideRunInTerminal>true</swiftbar.hideRunInTerminal>
+# <swiftbar.hideDisablePlugin>true</swiftbar.hideDisablePlugin>
+# <swiftbar.hideSwiftBar>true</swiftbar.hideSwiftBar>
 
 import os
 # import sys
