@@ -21,32 +21,32 @@ ICONDIR = os.path.join(PWD,'icons')
 
 def geticonasbase64(icon):
     with open(os.path.join(ICONDIR,icon), 'rb') as fh:
-        __base64 = base64.b64encode(fh.read())
-    return str(__base64, encoding='utf8')
+        _base64 = base64.b64encode(fh.read())
+    return str(_base64, encoding='utf8')
 
 def getcurrentbrowser():
-    __p = subprocess.run(['defaults',
+    _p = subprocess.run(['defaults',
                          'read',
                           os.path.join(os.environ['HOME'],
                                        "Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure")],
                          capture_output=True)
-    __last_line = ''
-    for __l in str(__p.stdout, encoding='utf8').split('\n'):
-        if __l.strip() == 'LSHandlerURLScheme = http;':
+    _last_line = ''
+    for _l in str(_p.stdout, encoding='utf8').split('\n'):
+        if _l.strip() == 'LSHandlerURLScheme = http;':
             break
-        __last_line = __l.strip()
-    return __last_line.split('.')[-1].strip('";')
+        _last_line = _l.strip()
+    return _last_line.split('.')[-1].strip('";')
 
 def listbrowsers():
-    __p = subprocess.run([DBBIN], capture_output=True)
+    _p = subprocess.run([DBBIN], capture_output=True)
     browsers = []
-    for __browser in str(__p.stdout, encoding="utf8").split("\n"):
-        browsers.append(__browser.strip())
+    for _browser in str(_p.stdout, encoding="utf8").split("\n"):
+        browsers.append(_browser.strip())
     return browsers
 
 def switchbrowsers(browser):
-    __p = subprocess.run([DBBIN, browser])
-    if __p.returncode != 0:
+    _p = subprocess.run([DBBIN, browser])
+    if _p.returncode != 0:
         return False
     return True
 
@@ -54,16 +54,16 @@ def main():
     current_browser = getcurrentbrowser()
     browsers = listbrowsers()
     if current_browser in BROWSERS:
-        print(" | image='%s'" % BROWSERS[current_browser][1])
+        print(f"{BROWSERS[current_browser][0]} | size=6 image='{BROWSERS[current_browser][1]}'")
     else:
         print("??? | color=blue")
     # Everything else goes in menus
     print('---')
     for browser in enumerate(BROWSERS):
-        __key = browser[1]
-        if __key in browsers:
+        _key = browser[1]
+        if _key in browsers:
             print(" | image='%s' shell='%s' param1='%s' refresh=true terminal=false" %
-                  (BROWSERS[__key][1], DBBIN, __key))
+                  (BROWSERS[_key][1], DBBIN, _key))
 
 
 BROWSERS = {"linkobrowser":("Linko", geticonasbase64('linko.png')),
@@ -71,7 +71,8 @@ BROWSERS = {"linkobrowser":("Linko", geticonasbase64('linko.png')),
             "firefox":("Firefox", geticonasbase64('firefox.png')),
             "chrome":("Chrome", geticonasbase64('chrome.png')),
             "edgemac":("Edge", geticonasbase64('edge.png')),
-            "browser":("Brave", geticonasbase64('brave.png'))
+            "browser":("Brave", geticonasbase64('brave.png')),
+            "chromium":("Chrommium", geticonasbase64('chromium.png'))
             }
 
 main()
